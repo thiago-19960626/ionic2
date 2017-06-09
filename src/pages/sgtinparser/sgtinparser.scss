@@ -1,0 +1,35 @@
+page-sgtinparser{
+    ion-content{
+
+        ion-item-group{
+            ion-item{
+                button.btn-smaller{
+                    border-radius: 15px !important;
+                    color:white;
+                    background: $primary;
+                    font-size: 20px !important;
+                    font-weight: 700 !important;
+                    min-width: 52px;
+                    min-height: 47px;
+                }
+
+                input{
+                    background-color: #eee !important;
+                    padding-left: 8px !important;
+                    padding-right: 8px !important;
+                    padding-top: 5px !important;
+                    padding-bottom: 5px !important;
+                }
+
+                .item-inner{
+                    border:none !important;
+                    box-shadow: none !important;
+
+                    p{
+                        white-space: normal;
+                    }
+                }
+            }
+        }
+    }
+}

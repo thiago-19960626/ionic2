@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title>{{'txtEnterActivationCode' | translate }}</ion-title>
+        <ion-buttons right>
+            <button ion-button clear (click)="close()">
+                <ion-icon name="ios-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item class="text-info">
+            <p>{{'txtEnterActCodeReceived' | translate }}</p>
+            <p>
+                {{email}}
+                <button (click)="showRegister()">
+                    <ion-icon class="icon-edit"></ion-icon>
+                </button>
+            </p>            
+        </ion-item>
+        <ion-item class="password-input">
+            <ion-input type="password" [(ngModel)]="pinCode"></ion-input>
+        </ion-item>        
+    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(1)">
+                    1
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(2)">
+                    2
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered" (click)="onKeyPad(3)">
+                <button class="btn-pin">
+                    3
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(4)">
+                    4
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(5)">
+                    5
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(6)">
+                    6
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(7)">
+                    7
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(8)">
+                    8
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(9)"> 
+                    9
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(-2)">
+                    <ion-icon name="close"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin" (click)="onKeyPad(0)">
+                    0
+                </button>
+            </ion-col>
+            <ion-col width-33 class="centered">
+                <button class="btn-pin success" (click)="onActivate()">
+                    <ion-icon name="checkmark"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

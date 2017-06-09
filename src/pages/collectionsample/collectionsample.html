@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{'txtCodeCollectorSample' | translate }} - {{collection.name}}</ion-title>
+        <ion-buttons left>
+            <button ion-button clear (click)="close()">
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button ion-button clear (click)="exportByEmail()">
+                <ion-icon name="ios-open-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item color="dark">
+            <ion-input type="text" placeholder="{{'txtCodeCollectorCode' | translate}}" [(ngModel)]="lastResult.code"></ion-input>
+            <button ion-button item-right class="btn-smaller" (click)="addCodeToList()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+            <button ion-button item-right class="btn-smaller" (click)="scan()">
+                <ion-icon name="md-qr-scanner"></ion-icon>
+            </button>
+        </ion-item>
+        <ion-item-sliding *ngFor="let code of codes">
+            <ion-item>
+                <h2>{{code.code}}</h2>
+                <p> 
+                    {{code.timestamp}} - 
+                    <span *ngIf="code.gps.status === 'OK'">
+                        {{code.gps.latitude.toFixed(3)}} , {{code.gps.longitude.toFixed(3)}} ±{{code.gps.accuracy.toFixed(1)}}
+                    </span>
+                    <span *ngIf="code.gps.status !== 'OK'">
+                        {{code.gps.status}}
+                    </span>
+                </p>
+
+                <p *ngIf="code.gps.location">
+                    {{code.gps.location}}
+                </p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="danger" (click)="deleteCode(code)">
+                    Delete
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

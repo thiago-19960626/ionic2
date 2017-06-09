@@ -1,0 +1,98 @@
+page-activate{
+    ion-header::after{
+        background: none !important;
+    }
+
+    ion-content{
+        background: url(../assets/images/background.png) no-repeat center center !important;
+        background-size: cover !important;
+
+        .scroll-content{
+            overflow: hidden;
+        }
+
+        ion-list{
+            width: 90%;
+            margin: 0 auto !important;
+
+            ion-item.text-info{
+                background-color: transparent !important;
+                color: white !important;
+                border: none !important;
+
+                .item-inner{
+                    border: none !important;
+                    
+                    ion-label{
+                        text-align: center;
+
+                        p{
+                            text-align: center;
+                            font-weight: bold;
+                            color: white !important;
+                            font-size: 16px !important;
+                            white-space: normal !important;
+                        }
+
+                        button{                            
+                            background-color: transparent !important;
+                            color: white !important;
+
+                            ion-icon{
+                                font-family: 'icomoon' !important;
+                                font-style: normal;
+                                font-weight: normal;
+                                text-transform: none !important;
+                                font-size: 40px !important;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+            ion-item.password-input{
+                background-color: transparent !important;               
+                border-bottom: none !important;
+                box-shadow: none !important;
+                border: none !important;
+
+                ion-input{
+                   input{
+                       font-size: 30px;
+                       color: white;
+                       text-align: center;
+                       letter-spacing: 4px;
+                       margin: 0 !important;
+                   }
+                }
+            }
+        }
+
+        ion-grid{
+            max-width: 280px !important;
+            margin: 0 auto !important;
+
+            ion-row{
+                ion-col{
+                    button.btn-pin{
+                        border-radius: 50%;
+                        width: 70px;
+                        height: 70px;
+                        border: 1px solid white;
+                        padding: 0;
+                        text-align: center;
+                        background: transparent;
+                        font-size: 24px;
+                        color: white;
+                    }
+
+                    button.success{
+                        background-color: #1fc565;
+                        border-color: #1fc565;
+                    }
+                }
+            }
+        }
+    }
+}

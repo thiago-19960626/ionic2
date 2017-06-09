@@ -1,0 +1,228 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{'txtQueryResult' | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content #content>
+    <ion-list class="check-container" *ngIf="data.Authentication">
+        <ion-item class="check-title-container" [ngClass]="getValidityCss()" (click)="panelShow.ValidityDetails=!panelShow.ValidityDetails">
+            <ion-icon  item-left></ion-icon>
+            <b>{{getValidityShortDescription()}}</b>
+        </ion-item>
+        <ion-item text-wrap class="check-detail-container" [ngClass]="getValidityCss()" *ngIf="panelShow.ValidityDetails">
+            {{getValidityDescription()}}
+        </ion-item>
+    </ion-list>
+    <div class="block-product-image">
+        <img [src]="getProductImg()" class="product-image" (click)="showImageViewer()">
+        <img src="assets/images/cert-halal.png" class="cert-halal" *ngIf="false">
+        <button (click)="showDisclaimer()">
+            {{'txtDisclaimer' | translate}}
+        </button>
+    </div>
+    <ion-list class="block-product-title" *ngIf="!panelShow.Results">
+        <ion-item>
+            <h2>{{data.Code}}</h2>
+            <p>{{'txtItem' | translate}}</p>
+        </ion-item>
+        <ion-grid>
+            <ion-row>
+                <ion-col width-50>
+                    <h2>{{data.BrandOwner}}</h2>
+                    <p>{{'txtBrandOwner' | translate}}</p>
+                </ion-col>
+                <ion-col width-50 *ngIf="viewOption.DetailedView">
+                    <h2>{{data.Product.PackagingLevel}}</h2>
+                    <p>{{'txtPackagingLevel' | translate}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+    <ion-list class="block-product-description" *ngIf="data.Product.ProductDescription">
+        <ion-item class="title" (click)="panelShow.Product=!panelShow.Product">
+            <p>{{'txtProduct' | translate}}</p>
+        </ion-item>
+        <ion-item *ngIf="panelShow.Product">
+            <h2>{{data.Product.ProductDescription}}</h2>
+            <p>{{'txtDescription' | translate}}</p>
+        </ion-item>
+        <ion-item *ngIf="panelShow.Product">
+            <h2>{{data.Product.DesignMarket}}</h2>
+            <p>{{'txtDestinationMarket' | translate}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-list class="block-manufacturing" *ngIf="data.Manufacturing.Factory.Name">
+        <ion-item class="title" (click)="panelShow.Manufacturing=!panelShow.Manufacturing">
+            <p>{{'txtProduction' | translate}}</p>
+        </ion-item>
+        <ion-item *ngIf="panelShow.Manufacturing">
+            <h2>{{data.Manufacturing.ProductionDateTime | amDateFormat:'MMM DD YYYY HH:mm Z'}}</h2>
+            <p>{{'txtProductionDate' | translate}}</p>
+        </ion-item>
+        <ion-item *ngIf="panelShow.Manufacturing" class="border-item">
+            <h2>{{data.Manufacturing.Factory.CountryCode}} - {{data.Manufacturing.Factory.Name}}</h2>
+            <p>{{'txtFactory' | translate}}</p>
+        </ion-item>
+        <ion-item *ngIf="panelShow.Manufacturing&&viewOption.DetailedView" class="border-item">
+            <h2>{{data.Product.ProductCode}}</h2>
+            <p>{{'txtProductCode' | translate}}</p>
+        </ion-item>
+        <ion-grid *ngIf="viewOption.DetailedView&&panelShow.Manufacturing">
+            <ion-row>
+                <ion-col width-50>
+                    <h2>{{data.Manufacturing.ProductionLine}}</h2>
+                    <p>{{'txtProductionLine' | translate}}</p>
+                </ion-col>
+                <ion-col width-50 *ngIf="data.Authentication">
+                    <h2>{{data.Authentication.CodeGeneratorId}}</h2>
+                    <p>{{'txtCodeGeneratorId'| translate}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+    <ion-list class="block-aggregation" *ngIf="data.Manufacturing.ParentItems[0]&&viewOption.DetailedView">
+        <ion-item class="title" (click)="panelShow.Aggregation=!panelShow.Aggregation">
+            <p>{{'txtAggregation' | translate}}</p>
+        </ion-item>
+        <div *ngIf="panelShow.Aggregation">
+        <ion-item *ngFor="let parentItem of data.Manufacturing.ParentItems">
+            <h2>{{parentItem.Key}}</h2>
+            <p (click)="queryParent(parentItem.Value)">{{parentItem.Value}}</p>
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item> 
+        </div>       
+    </ion-list>
+    <ion-list class="block-tracking" *ngIf="data.TrackingEvents[0]&&!viewOption.DetailedView">
+        <ion-item class="title" (click)="panelShow.Tracking=!panelShow.Tracking">
+            <p>{{'txtEvents' | translate}}</p>
+        </ion-item>
+        <ion-item *ngIf="panelShow.Tracking">
+            <ion-grid>
+                <ion-row *ngFor="let trackingEvent of data.TrackingEvents">
+                    <ion-col class="on-left">
+                        <ion-icon class="result-icon" [ngClass]="getEventTypeCss(trackingEvent.EventType)" name="getEventTypeCss(trackingEvent.EventType)"></ion-icon>
+                    </ion-col>
+                    <ion-col class="on-right">
+                        <b>{{getEventType(trackingEvent.EventType)}}</b>
+                        <p>{{trackingEvent.EventDateTime | amDateFormat:'MMM DD YYYY HH:mm Z'}}</p>
+                        <p class="divider"> &nbsp;</p>
+                        <div *ngIf="trackingEvent.EventType==1">
+                        <p><b>{{'txtShippedTo' | translate }}</b></p>
+                        <p>
+                            {{trackingEvent.ShipTo.Name}},
+                            {{trackingEvent.ShipTo.StreetAddress}},
+                            {{getCountryName(trackingEvent.ShipTo.CountryCode)}}
+                        </p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+    <ion-list class="block-tracking" *ngIf="data.TrackingEvents[0]&&viewOption.DetailedView">
+        <ion-item class="title" (click)="panelShow.Tracking=!panelShow.Tracking">
+            <p>{{'txtEvents' | translate}}</p>
+        </ion-item>
+        <ion-item *ngIf="panelShow.Tracking">
+            <ion-grid>
+                <ion-row *ngFor="let trackingEvent of data.TrackingEvents">
+                    <ion-col class="on-left">
+                        <ion-icon class="result-icon" [ngClass]="getEventTypeCss(trackingEvent.EventType)" name="getEventTypeCss(trackingEvent.EventType)"></ion-icon>
+                    </ion-col>
+                    <ion-col class="on-right">
+                        <b>{{getEventType(trackingEvent.EventType)}}</b>
+                        <p>{{trackingEvent.EventDateTime | amDateFormat:'MMM DD YYYY HH:mm Z'}}</p>
+                        <p class="divider"> &nbsp;</p>
+                        <p *ngIf="trackingEvent.EventType==1">
+                            <b>{{'txtShippedFrom' | translate}}</b>
+                        </p>
+                        <p *ngIf="trackingEvent.EventType==4">
+                            <b>{{'txtReceptionFrom' | translate}}</b>
+                        </p>
+                        <p>{{trackingEvent.ShipFrom.Name}}</p>
+                        <p>{{trackingEvent.ShipFrom.StreetAddress}}</p>
+                        <p>{{trackingEvent.ShipFrom.PostalCode}} {{trackingEvent.ShipFrom.City}}</p>
+                        <p>{{getCountryName(trackingEvent.ShipTo.CountryCode)}}</p>
+                        <p class="divider"> &nbsp;</p>
+                        <div *ngIf="trackingEvent.EventType==1">
+                        <p>
+                            <b>{{'txtEventTo' | translate}}</b>
+                        </p>
+                        <p>{{trackingEvent.ShipTo.Name}}</p>
+                        <p>{{trackingEvent.ShipTo.StreetAddress}}</p>
+                        <p>{{trackingEvent.ShipTo.PostalCode}} {{trackingEvent.ShipTo.City}}</p>
+                        <p>{{getCountryName(trackingEvent.ShipTo.CountryCode)}}</p>
+                        <p class="divider"> &nbsp;</p>
+                        <p>
+                            <b>{{'txtSoldBy' | translate}}</b>
+                        </p>
+                        <p>{{trackingEvent.SoldBy.Name}}</p>
+                        <p>{{trackingEvent.SoldBy.StreetAddress}}</p>
+                        <p>{{trackingEvent.SoldBy.PostalCode}} {{trackingEvent.SoldBy.City}}</p>
+                        <p>{{getCountryName(trackingEvent.ShipTo.CountryCode)}}</p>
+                        <p class="divider"> &nbsp;</p>
+                        <p>
+                            <b>{{'txtEventTo' | translate}}</b>
+                        </p>
+                        <p>{{trackingEvent.SoldTo.Name}}</p>
+                        <p>{{trackingEvent.SoldTo.StreetAddress}}</p>
+                        <p>{{trackingEvent.SoldTo.PostalCode}} {{trackingEvent.SoldTo.City}}</p>
+                        <p>{{getCountryName(trackingEvent.ShipTo.CountryCode)}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+    <div class="map-container">
+        <!-- MAP -->
+    </div>
+
+    <div class="scroll-up" *ngIf="lastScrollValue > 100" >
+        <button ion-button clear icon-button (click)="scrollUp()">
+            <ion-icon name="ios-arrow-up-outline"></ion-icon>
+        </button>
+    </div>
+
+    <ion-grid class="tabs-bottom" [ngClass]="{'visibleTabs':(lastScrollValue < 100), 'hiddenTabs': (lastScrollValue >= 100)}" >
+        <ion-row>
+            <ion-col width-33>
+                <button ion-button [clear]="!viewOption.DetailedView" block (click)="viewOption.DetailedView=!viewOption.DetailedView">
+                    <span>
+                        <ion-icon class="icon-details"></ion-icon>
+                        <br>
+                        <span class="tabitem-title">
+                            Details
+                        </span>
+                    </span>
+                </button>
+            </ion-col>
+            <ion-col width-33>
+                <button ion-button clear block (click)="backAndQueryScan()">
+                    <span>
+                        <ion-icon class="icon-scaner"></ion-icon>
+                        <br>
+                        <span class="tabitem-title">
+                            Scan
+                        </span>
+                    </span>
+                </button>
+            </ion-col>
+            <ion-col width-33>
+                <button ion-button clear block (click)="exportByEmail()">
+                    <span>
+                        <ion-icon class="icon-email_export"></ion-icon>
+                        <br>
+                        <span class="tabitem-title">
+                            Export
+                        </span>
+                    </span>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div #map id="map"></div>
+</ion-content>
+<div id="image-viewer" *ngIf="imageviewer" (click)="imageviewer=false">
+    <img [src]="getProductImg()"/>
+</div>

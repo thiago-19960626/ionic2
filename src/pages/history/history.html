@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{'txtHistory' | translate}}</ion-title>
+        <ion-buttons left>
+            <button ion-button clear menuToggle>
+                <ion-icon name="md-menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button ion-button clear (click)="confirmHistoryClear()">
+                <ion-icon name="ios-trash-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list *ngIf="history.length==0">
+        <ion-item>
+            <ion-label>{{'txtHistoryEmpty' | translate}}</ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="history.length>0">
+        <button ion-item *ngFor="let item of history" (click)="goToDetail(item)">
+            <ion-thumbnail item-left>
+                <img [src]="getProductImg(item)">
+            </ion-thumbnail>
+            <p class="timestampText">{{item.TimeStamp | amDateFormat:'MMM DD YYYY HH:mm Z'}}</p>
+            <h2>{{item.Code}}</h2>
+            <p class="product-description">{{item.Product.ProductCode}}</p>
+            <p class="product-description">{{item.Product.ProductDescription}}</p>
+        </button>
+    </ion-list>
+</ion-content>

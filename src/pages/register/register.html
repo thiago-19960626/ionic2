@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title>{{'txtRegisterYourDevice' | translate}}</ion-title>
+        <ion-buttons right>
+            <button ion-button clear (click)="close()">
+                <ion-icon  name="ios-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>    
+    <ion-list>
+        <ion-item class="text-info">
+            <p *ngIf="!allowPhoneRegistration">{{'txtProvideEmail' | translate}}</p>
+            <p *ngIf="allowPhoneRegistration">{{'txtProvidePhoneEmail' | translate}}</p>
+            <br>
+        </ion-item>
+        <ion-item class="input-container">
+            <ion-icon color="light" name="ios-mail-outline" item-left></ion-icon>
+            <ion-input placeholder="{{'txtEmail' | translate}}" [(ngModel)]="registerData.accountEmail"></ion-input>
+        </ion-item>
+        <ion-item class="input-container" *ngIf="allowPhoneRegistration">
+            <ion-icon color="light" name="ios-phone-portrait-outline" item-left></ion-icon>
+            <ion-input placeholder="{{'txtPhone' | translate}}" [(ngModel)]="registerData.accountPhone"></ion-input>
+        </ion-item>
+        <button ion-button block round outline color="light" large (click)="onRegister()">
+            {{'txtRegister' | translate}}
+        </button>
+    </ion-list>    
+</ion-content>

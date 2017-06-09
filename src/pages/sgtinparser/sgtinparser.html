@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{'txtSGTINParser' | translate}}</ion-title>
+        <ion-buttons left>
+            <button ion-button clear menuToggle>
+                <ion-icon name="md-menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-item-group>
+        <ion-item-divider color="dark">Code</ion-item-divider>
+        <ion-item>
+            <ion-input type="text" placeholder="Code" [(ngModel)]="lastResult.code"></ion-input>
+            <button ion-button item-right class="btn-smaller" (click)="sgtinQuery()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+            <button ion-button item-right class="btn-smaller" (click)="scan()">
+                <ion-icon name="md-qr-scanner"></ion-icon>
+            </button>
+        </ion-item>
+        <ion-item>
+            <p>Code: {{lastResult.code}}</p>
+            <p>Code Type: {{lastResult.codeType}}</p>
+            <p>Barcode Type: {{lastResult.type}}</p>
+        </ion-item>
+        <ion-item-divider color="dark">Additional Info</ion-item-divider>  
+        <div *ngIf="lastResult.sgtinTags">
+            <ion-item *ngFor="let tag of lastResult.sgtinTags">
+                <h2>Tag {{tag.tagId}} = {{tag.tagName}}</h2>
+                <p>Value: {{tag.tagValue}}</p>
+            </ion-item>     
+        </div>
+    </ion-item-group>
+</ion-content>

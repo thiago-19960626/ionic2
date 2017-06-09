@@ -1,0 +1,38 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <img class="menuLogo">
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item (click)="openPage(0)" mode="md">
+        <i class='icon-check'></i>
+        <p>{{'txtItemQuery' | translate }}</p>
+      </button>
+      <button menuClose ion-item (click)="openPage(1)" mode="md">
+        <i class='icon-history'></i>
+        <p>{{'txtHistory' | translate }}</p>
+      </button>
+      <button menuClose ion-item (click)="openPage(2)" mode="md" *ngIf="developerMode">
+        <i class='icon-collector'></i>
+        <p>{{'txtCodeCollector' | translate }}</p>
+      </button>
+      <button menuClose ion-item (click)="openPage(3)" mode="md" *ngIf="developerMode">
+        <i class='icon-parser'></i>
+        <p>{{'txtSGTINParser' | translate }}</p>
+      </button>
+      <button menuClose ion-item (click)="openPage(4)" mode="md">
+        <i class='icon-settings'></i>
+        <p>{{'txtSettings' | translate }}</p>
+      </button>
+      <button menuClose ion-item (click)="openPage(5)" mode="md">
+        <i class='icon-about'></i>
+        <p>{{'txtAbout' | translate }}</p>
+      </button>
+    </ion-list>
+  </ion-content>
+  <p class="menu-copyright">&copy;2014-2017 Inexto SA</p>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{"txtAbout" | translate }}</ion-title>
+        <ion-buttons left>
+            <button ion-button clear menuToggle>
+                <ion-icon name="md-menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <img class="titleLogo">
+        <div class="app-information" (click)="aboutClick()">
+            <p>{{about.appName}} v{{about.appVersion}} <span *ngIf="developerMode">(Developer Mode)</span></p>
+            <p>&copy; 2014-{{about.currentYear | amDateFormat:'YYYY'}} {{about.copyright}}</p>
+        </div>
+        <div class="device-information">
+            <h4>About</h4>
+            <p>
+                INEXTO offers proven solutions for brand protection, authentication, serialization and track & trace that enables safe, secure and interoperable supply chains.
+                Our open standards approach is GS1 and ISO compliant and helps clients in the public and private sectors to increase trust, transparency, safety and ethics in trade flows.
+            </p>
+        </div>
+        <div class="device-information">
+            <h4>Device Information</h4>
+            <ion-list *ngIf="deviceinfo">
+                <ion-item *ngIf="deviceinfo.model">
+                    <ion-label>Model: {{deviceinfo.model}}</ion-label>
+                </ion-item>
+                <ion-item *ngIf="!deviceinfo.model">
+                    <ion-label>Platform: {{deviceinfo.platform}}</ion-label>
+                </ion-item>
+                <ion-item *ngIf="deviceinfo.platform">
+                    <ion-label>{{deviceinfo.platform}} {{deviceinfo.version}} / Cordova {{deviceinfo.cordova}}</ion-label>
+                </ion-item>
+                <ion-item *ngIf="developerMode">
+                    <ion-label>Server: {{about.server}}</ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-list>
+    <div class="bottom">
+        Powered by
+        <img class="companyLogo">
+    </div>
+</ion-content>

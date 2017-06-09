@@ -1,0 +1,25 @@
+page-collectionsample{
+    ion-content{
+        background: url('../assets/images/background.png') no-repeat center center !important;
+        background-size: cover !important;
+
+        ion-list{
+            ion-item{
+                button.btn-smaller{
+                    border-radius: 15px !important;
+                    color: white;
+                    background: $primary;
+                    font-size: 20px !important;
+                    font-weight: 700 !important;
+                    min-width: 52px;
+                    min-height: 47px;
+                }
+
+                .item-inner{
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+            }
+        }
+    }
+}

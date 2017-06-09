@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title *ngIf="(action=='add')">{{'txtCodeCollectorAddCollection' | translate}}</ion-title>
+        <ion-title *ngIf="(action=='edit')">{{'txtCodeCollectorEditCollection' | translate}}</ion-title>
+        <ion-buttons left (click)="close()">
+            <button ion-button clear>
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>{{'txtCodeCollectorName' | translate}}</ion-label>
+            <ion-input type="text" [(ngModel)]="formData.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <button ion-button block round color="primary" large (click)="addCollection()">
+                {{'txtCodeCollectorSave' | translate}}
+            </button>
+        </ion-item>
+    </ion-list>
+</ion-content>

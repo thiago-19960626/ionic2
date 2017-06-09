@@ -1,0 +1,102 @@
+page-aitquery{
+    ion-content{
+
+        .form{
+            width: 80%;
+            margin: 0 auto;
+
+            ion-list{              
+
+                ion-item.input-container{                    
+                    background-color: rgba(100, 100, 100, 0.07);
+                    border: none;
+                    border-bottom: 3px solid $grey1 !important;
+                    border-radius: 0;
+                    height: 59px;
+                    position: relative;
+                    margin-bottom: 25px;       
+
+                    .item-inner{
+                        box-shadow: none !important;
+                        border: none !important;
+                    }            
+                }
+
+                .divider{
+                    margin: 12px 30px;
+                    text-align: center;
+                    position: relative;
+
+                    span{
+                        color: $grey1;
+                        text-transform: uppercase;
+                        font-size: 12px;
+                    }
+                }
+                .divider:before{
+                    content: '';
+                    width: 35%;
+                    height: 1px;
+                    position: absolute;
+                    background: $grey1;
+                    left: 0;
+                    top: 10px;
+                }
+
+                .divider:after{
+                    content: '';
+                    width: 35%;
+                    height: 1px;
+                    position: absolute;
+                    background: $grey1;
+                    right: 0;
+                    top: 10px;
+                }
+
+                button.query_btn{
+                    padding: 0 80px !important;
+                    font-size: 20px !important;
+                    height: 56px !important;
+                    border-radius: 28px !important;
+
+                    ion-icon{
+                        font-family: 'icomoon' !important;
+                        font-style: 'normal';
+                        font-weight: 'normal';
+                        position:  absolute;
+                        left: 25px;
+                        top: 8px;
+                        font-size: 40px;
+                    }
+                }
+            }
+        }   
+
+        .bottom-bar{
+            margin-top: 30px;
+            height: auto;
+            color: $grey1;
+            background-color: rgba(255,255,255,0.46);
+
+            ion-grid{
+                width: 80%;
+                margin: 0 auto;
+                font-size: 14px;
+
+                .supported-icon{
+                    padding: 0;
+                    justify-content: center;
+                    align-items: center;
+                    display: flex;
+
+                    ion-icon{
+                        font-size: 90px;
+                        color: $grey1;
+                        line-height: 90px;
+                        font-family: 'icomoon' !important;
+                    }
+                }
+            }            
+        }     
+    }    
+}

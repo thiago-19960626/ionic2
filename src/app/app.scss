@@ -1,0 +1,170 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@font-face{
+    font-family: 'Roboto Condensed Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../assets/fonts/RobotoCondensed-Regular.woff) format('woff');
+}
+
+html,
+body,
+ion-input,
+button,
+select,
+textarea,
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5, .h6{
+    font-family: "Roboto Condensed Regular";
+}
+
+.toolbar-title{
+    font-family: "Roboto Condensed Regular";
+    font-size: 22px;
+    font-weight: 500;    
+}
+
+.toolbar-background-ios{
+    border: none !important;
+}
+
+ion-icon[name="md-menu"],
+ion-icon[name="ios-trash-outline"],
+ion-icon[name="ios-close"],
+ion-icon[name="md-add"],
+ion-icon[name="ios-arrow-back"],
+ion-icon[name="ios-open-outline"]{
+    font-size: 24px;
+}
+
+.button{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 56px;
+    text-transform: none !important;
+}
+
+button[disabled]{
+    opacity: 1 !important;
+    color: #c0c0c0;
+}
+
+.centered{
+    text-align: center;
+}
+
+//menu variables and scss
+$light: #ddd;
+$grey2: #777;
+
+ion-menu{
+    ion-header{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 5px;
+
+        img{
+            height: 30px;
+            border: 0;
+            margin: 0 auto;
+        }
+    }
+
+    ion-header:after{
+        background: none !important;
+    }
+
+    ion-content{
+        background: url(../assets/images/background-menu.png) no-repeat bottom right !important;
+        background-size: cover !important;
+
+        ion-list{
+            border-top: 1px solid $light !important;
+            border-bottom: 1px solid $light !important;
+
+            button{
+                color: $grey2 !important;
+                border-top:1px solid $light !important;
+                background-color:transparent !important;
+
+                .item-inner{
+                    border: none !important;
+                }
+
+                i{
+                    margin-right: 16px;
+                    font-size: 36px !important;  
+                    position: relative;                  
+                    color: $primary;
+                    font-family: 'icomoon' !important;
+                    font-weight: normal !important;
+                    font-style: normal;
+                    float: left;
+                }
+
+                p{
+                    line-height: 36px !important;
+                    float: left;
+                    font-size: 16px !important;
+                    margin: 0 !important;
+                    font-family: sans-serif;
+                }
+            }
+        }
+    }
+
+    .menu-copyright{
+        font-size: 12px;
+        text-align: center;
+        color: $grey2;
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        z-index: 99;
+    }
+}
+
+.menuLogo{
+    content: url('../assets/images/inextrace_logo.png');
+}
+
+.titleLogo{
+    height: 35px;
+    border: 0;
+    content: url('../assets/images/inextrace_logo.png');
+    display: block;
+    margin: 40px auto 40px;
+}
+
+.companyLogo{
+    content: url('../assets/images/inexto_logo.png');
+}
+
+ion-content{
+    background: url('../assets/images/background-grey.png') no-repeat center center;
+    background-size: cover;
+}
+
+.modal-wrapper{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}

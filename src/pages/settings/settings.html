@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{'txtSettings' | translate}}</ion-title>
+        <ion-buttons left>
+            <button ion-button clear menuToggle>
+                <ion-icon name="md-menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>
+                {{'txtLanguage' | translate}}
+            </ion-label>
+            <ion-select [(ngModel)]="language" (ionChange)="setLanguage()">
+                <ion-option value="en">English</ion-option>
+                <ion-option value="cn">Chinese / 中國</ion-option>
+                <ion-option value="fr">French / Français</ion-option>
+                <ion-option value="it">Italian / Italiano</ion-option>
+                <ion-option value="kz">Kazakh / Қазақ</ion-option>
+                <ion-option value="ru">Russian / Pусский</ion-option>
+                <ion-option value="es">Spanish / Español</ion-option>
+                <ion-option value="uk">Ukrainian / Український</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="platform != 'iOS'">
+            <ion-label>
+                {{'txtFocusMode' | translate}}
+            </ion-label>
+            <ion-select [(ngModel)]="focusMode" (ionChange)="setFocusMode()">
+                <ion-option value="auto">{{'txtFocusAuto' | translate}}</ion-option>
+                <ion-option value="auto-samsung">{{'txtFocusAuto' | translate}} (Samsung)</ion-option>
+                <ion-option value="continuous-picture">{{'txtFocusContinuous' | translate}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="platform == 'iOS' && developerMode == true">
+            <ion-label>{{'txt60fps' | translate}}</ion-label>
+            <ion-select [(ngModel)]="fpsMode" (ionChange)="setFPSMode()">
+                <ion-option value="false">{{'txtEnabled' | translate }}</ion-option>
+                <ion-option value="true">{{'txtDisabled' | translate }}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <br><br><br>
+    <div class="bottom-bar">
+        <button color="primary" ion-button round outline large block (click)="register()" *ngIf="!isActivated&&!isRegistered">
+            {{'txtRegister' | translate}}
+        </button>
+        <button color="primary" ion-button round outline large block (click)="logout(true)" *ngIf="isActivated&&isRegistered">
+            {{'txtResetAccount' | translate}}
+        </button>
+        <button color="primary" ion-button round outline large block (click)="activate()" *ngIf="isRegistered&&!isActivated">
+            {{'txtActivate' | translate}}
+        </button>
+    </div>
+</ion-content>

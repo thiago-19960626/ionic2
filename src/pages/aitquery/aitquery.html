@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{'txtItemQuery' | translate }}</ion-title>
+        <ion-buttons left>
+            <button ion-button clear menuToggle>
+                <ion-icon name="md-menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="form">
+        <ion-list>
+            <img class="titleLogo">
+            <ion-item class="input-container">
+                <ion-input type="text" placeholder="{{'txtSupiField' | translate }}" [(ngModel)]="checkFormData.supiCode"></ion-input>
+                <button ion-button clear item-right *ngIf="checkFormData.supiCode" (click)="checkFormData.supiCode=null">
+                    <ion-icon name="md-close"></ion-icon>
+                </button>                
+            </ion-item>
+            <button class="query_btn" ion-button round block  large [disabled]="!checkFormData.supiCode" [color]="checkFormData.supiCode?'primary':'disabledcolor'" (click)="queryVerify()">
+                <ion-icon class="icon-check"></ion-icon>
+                {{'txtCheck' | translate }}
+            </button>
+            <div class="divider">
+                <span>or</span>
+            </div>
+            <button class="query_btn" ion-button round block  large (click)="scan()">
+                <ion-icon class="icon-scaner"></ion-icon>
+                {{ 'txtScan' | translate }}
+            </button>
+        </ion-list>
+    </div>
+    <div class="bottom-bar">
+        <ion-grid>
+            <ion-row>
+                <ion-col width-25 class="centered supported-icon">
+                    <ion-icon class="icon-info"></ion-icon>
+                </ion-col>
+                <ion-col width-75>
+                    <b>{{'txtSupportedCodes' | translate }}</b>
+                    <br>
+                    <span [innerHTML]="term"></span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

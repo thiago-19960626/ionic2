@@ -1,0 +1,22 @@
+page-settings{
+    ion-content{
+        ion-list{
+            ion-item{
+                height: 72px !important;
+
+                ion-label{
+                    color: #444 !important;
+                }
+
+                ion-select{
+                    color: $primary;
+                }
+            }
+        }
+
+        .bottom-bar{
+            width: 90%;
+            margin: 0 auto;
+        }
+    }
+}
